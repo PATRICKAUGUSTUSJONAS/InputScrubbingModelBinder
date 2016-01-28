@@ -1,0 +1,23 @@
+﻿@model List<Account>
+
+<br /><br />
+
+<p>
+    <a asp-action="Create">Create A New Account</a>
+</p>
+
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Balance</th>
+    </tr>
+
+    @foreach (var account in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => account.Name)</td>
+            
+            <td>@Html.DisplayFor(modelItem => account.Balance)</td>
+        </tr>
+    }
+</table>
