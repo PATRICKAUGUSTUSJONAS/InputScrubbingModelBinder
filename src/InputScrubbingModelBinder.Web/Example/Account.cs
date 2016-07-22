@@ -1,14 +1,13 @@
-﻿using InputScrubbingModelBinder.Web.Attributes;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 
-namespace InputScrubbingModelBinder.Web.Models
+namespace InputScrubbingModelBinder.Web.Example
 {
     public class Account
     {
         [Required]
         public string Name { get; set; }
-        
+
         [Required]
         [CurrencyScrubber]
         public decimal Balance { get; set; }

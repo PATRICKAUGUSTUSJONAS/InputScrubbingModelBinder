@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Hosting;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using InputScrubbingModelBinder.Web.ModelBinders;
+using InputScrubbingModelBinder.Web.Example;
 
 namespace InputScrubbingModelBinder.Web
 {
@@ -11,14 +15,15 @@ namespace InputScrubbingModelBinder.Web
     {
         public Startup(IHostingEnvironment env)
         {
-            // Set up configuration sources.
             var builder = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json")
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
 
-        public IConfigurationRoot Configuration { get; set; }
+        public IConfigurationRoot Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -26,10 +31,9 @@ namespace InputScrubbingModelBinder.Web
             // Add framework services.
             services.AddMvc(config =>
             {
-                config.ModelBinders.Insert(0, new ScrubbingModelBinder());
+                config.ModelBinderProviders.Insert(0, new ScrubbingModelBinderProvider());
             });
 
-            services.AddCaching();
             services.AddSession();
         }
 
@@ -43,15 +47,13 @@ namespace InputScrubbingModelBinder.Web
 
             if (env.IsDevelopment())
             {
-                app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
+                app.UseBrowserLink();
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
-            app.UseIISPlatformHandler();
 
             app.UseStaticFiles();
 
@@ -62,8 +64,5 @@ namespace InputScrubbingModelBinder.Web
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
-
-        // Entry point for the application.
-        public static void Main(string[] args) => WebApplication.Run<Startup>(args);
     }
 }

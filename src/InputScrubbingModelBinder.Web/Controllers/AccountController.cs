@@ -1,8 +1,6 @@
-﻿using InputScrubbingModelBinder.Web.Models;
-using Microsoft.AspNet.Mvc;
-using Microsoft.AspNet.Http;
-using InputScrubbingModelBinder.Web.Extensions;
+﻿using InputScrubbingModelBinder.Web.Example;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 
 namespace InputScrubbingModelBinder.Web.Controllers
 {

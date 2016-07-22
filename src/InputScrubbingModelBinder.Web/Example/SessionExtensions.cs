@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNet.Http.Features;
-using Microsoft.AspNet.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
-namespace InputScrubbingModelBinder.Web.Extensions
+namespace InputScrubbingModelBinder.Web.Example
 {
     // Credit for the following goes to Ben Cull @ http://benjii.me/2015/07/using-sessions-and-httpcontext-in-aspnet5-and-mvc6/
     public static class SessionExtensions

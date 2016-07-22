@@ -1,4 +1,4 @@
-﻿namespace InputScrubbingModelBinder.Web.Interfaces
+﻿namespace InputScrubbingModelBinder.Web.Example
 {
     public interface IScrubberAttribute
     {

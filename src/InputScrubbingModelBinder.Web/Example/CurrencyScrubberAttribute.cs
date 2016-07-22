@@ -1,8 +1,7 @@
-﻿using InputScrubbingModelBinder.Web.Interfaces;
-using System;
+﻿using System;
 using System.Globalization;
 
-namespace InputScrubbingModelBinder.Web.Attributes
+namespace InputScrubbingModelBinder.Web.Example
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class CurrencyScrubberAttribute : Attribute, IScrubberAttribute
