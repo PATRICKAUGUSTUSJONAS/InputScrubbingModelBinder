@@ -1,0 +1,22 @@
+﻿@model AddCustomer
+
+<br /><br />
+
+<form asp-controller="AddCustomer" asp-action="Index" method="post">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" placeholder="Name" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Age"></label>
+        <input asp-for="Age" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="UserId"></label>
+        <div>@Model.UserId</div>
+    </div>
+
+    <input type="submit" class="btn btn-default" value="Test It" />
+</form>

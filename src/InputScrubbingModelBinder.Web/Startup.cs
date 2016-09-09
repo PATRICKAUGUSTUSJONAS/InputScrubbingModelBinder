@@ -32,6 +32,7 @@ namespace InputScrubbingModelBinder.Web
             services.AddMvc(config =>
             {
                 config.ModelBinderProviders.Insert(0, new ScrubbingModelBinderProvider());
+                config.ModelBinderProviders.Insert(0, new UserAwareModelBinderProvider());
             });
 
             services.AddSession();
