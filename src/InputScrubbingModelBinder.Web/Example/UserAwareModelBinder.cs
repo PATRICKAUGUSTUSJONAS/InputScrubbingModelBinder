@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace InputScrubbingModelBinder.Web.Example
@@ -17,8 +14,15 @@ namespace InputScrubbingModelBinder.Web.Example
             //if (user != null)
             //{
             bindingContext.ModelState.SetModelValue(bindingContext.ModelName, valueProviderResult);
-            bindingContext.Result = ModelBindingResult.Success(Guid.NewGuid());
-            //    bindingContext.Result = ModelBindingResult.Success(user.GetUserIdFromClaims());
+
+            // read value from HttpContext.Session - set in GET call to /Account
+            var userId = bindingContext.HttpContext.Session.GetObjectFromJson<Guid>("userId");
+            if (userId == null) userId = Guid.Empty;
+            bindingContext.Result = ModelBindingResult.Success(userId);
+
+            //bindingContext.Result = ModelBindingResult.Success(Guid.NewGuid());
+            
+            //bindingContext.Result = ModelBindingResult.Success(user.GetUserIdFromClaims());
 
             //}
             return Task.CompletedTask;

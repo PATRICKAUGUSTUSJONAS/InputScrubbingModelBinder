@@ -1,6 +1,7 @@
 ﻿using InputScrubbingModelBinder.Web.Example;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace InputScrubbingModelBinder.Web.Controllers
 {
@@ -8,6 +9,8 @@ namespace InputScrubbingModelBinder.Web.Controllers
     {
         public IActionResult Index()
         {
+            HttpContext.Session.SetObjectAsJson("userId", Guid.NewGuid());
+
             return View(GetStoredAccounts());
         }
 
